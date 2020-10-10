@@ -25,6 +25,8 @@ class _MyAppHomePageState extends State<MyAppHomePage> {
     Transection(id: 't2', amount: 165, date: DateTime.now(), title: 'hi'),
     Transection(id: 't3', amount: 3635, date: DateTime.now(), title: 'five'),
     Transection(id: 't4', amount: 9853, date: DateTime.now(), title: 'cool'),
+    Transection(id: 't4', amount: 9852, date: DateTime.now(), title: 'cool'),
+    Transection(id: 't4', amount: 9851, date: DateTime.now(), title: 'cool'),
   ];
 
   void _addTransection(String title, double amount) {
