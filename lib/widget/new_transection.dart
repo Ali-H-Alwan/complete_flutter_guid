@@ -21,6 +21,7 @@ class _NewTransectionState extends State<NewTransection> {
       return;
     }
     widget.addTx(title, amount);
+    Navigator.of(context).pop();
   }
 
   @override
