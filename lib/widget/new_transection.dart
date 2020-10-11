@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class NewTransection extends StatefulWidget {
   final Function addTx;
@@ -14,14 +15,35 @@ class _NewTransectionState extends State<NewTransection> {
 
   final amountController = TextEditingController();
 
+  DateTime _selectedDate;
+
   void submittedDate() {
+    if(amountController.text.isEmpty){
+      return; 
+    }
     final title = titleController.text;
     final amount = double.parse(amountController.text);
-    if (title.isEmpty || amount <= 0) {
+    if (title.isEmpty || amount <= 0 || _selectedDate == null) {
       return;
     }
-    widget.addTx(title, amount);
+    widget.addTx(title, amount,_selectedDate);
     Navigator.of(context).pop();
+  }
+
+  void _PresentDateTimePiker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2020, 10, 1),
+            lastDate: DateTime.now())
+        .then((value) {
+      if (value == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = value;
+      });
+    });
   }
 
   @override
@@ -42,10 +64,28 @@ class _NewTransectionState extends State<NewTransection> {
                 keyboardType: TextInputType.number,
                 onSubmitted: (_) => submittedDate(),
                 decoration: InputDecoration(labelText: 'Enter Amount')),
-            FlatButton(
+            Container(
+              height: 70,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(_selectedDate == null
+                        ? 'No Date Choosen!'
+                        : 'Picked Date ${DateFormat.yMd().format(_selectedDate)}'),
+                  ),
+                  FlatButton(
+                    onPressed: _PresentDateTimePiker,
+                    child: Text('Chose Date'),
+                    textColor: Theme.of(context).primaryColor,
+                  )
+                ],
+              ),
+            ),
+            RaisedButton(
               child: Text('Add Transiction'),
               onPressed: () => submittedDate(),
-              textColor: Colors.deepPurple,
+              color: Theme.of(context).primaryColor,
+              textColor: Theme.of(context).textTheme.button.color,
             )
           ],
         ),
