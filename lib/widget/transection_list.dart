@@ -3,9 +3,9 @@ import '../Models/transection.dart';
 import 'package:intl/intl.dart';
 
 class TransectionList extends StatelessWidget {
+  final Function deleteTx;
   final List<Transection> userTransection;
-  TransectionList(this.userTransection);
-
+  TransectionList(this.userTransection, this.deleteTx);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,7 +49,7 @@ class TransectionList extends StatelessWidget {
                         Icons.delete,
                         color: Theme.of(context).errorColor,
                       ),
-                      onPressed: () {},
+                      onPressed: () => deleteTx(userTransection[index].id),
                     ),
                   ),
                 );

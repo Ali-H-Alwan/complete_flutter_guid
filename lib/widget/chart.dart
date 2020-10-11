@@ -10,20 +10,20 @@ class Chart extends StatelessWidget {
 
   List<Map<String, Object>> get groupTransecrionValues {
     return List.generate(7, (index) {
-      final WeakDay = DateTime.now().subtract(
+      final weekDay = DateTime.now().subtract(
         Duration(days: index),
       );
 
       double totalSum = 0.0;
       for (var i = 0; i < recentTransection.length; i++) {
-        if (recentTransection[i].date.day == WeakDay.day &&
-            recentTransection[i].date.month == WeakDay.month &&
-            recentTransection[i].date.year == WeakDay.year) {
+        if (recentTransection[i].date.day == weekDay.day &&
+            recentTransection[i].date.month == weekDay.month &&
+            recentTransection[i].date.year == weekDay.year) {
           totalSum += recentTransection[i].amount;
         }
       }
       return {
-        'day': DateFormat.E().format(WeakDay).substring(0, 1),
+        'day': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': totalSum
       };
     }).reversed.toList();

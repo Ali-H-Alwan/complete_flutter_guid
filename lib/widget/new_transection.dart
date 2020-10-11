@@ -18,19 +18,19 @@ class _NewTransectionState extends State<NewTransection> {
   DateTime _selectedDate;
 
   void submittedDate() {
-    if(amountController.text.isEmpty){
-      return; 
+    if (amountController.text.isEmpty) {
+      return;
     }
     final title = titleController.text;
     final amount = double.parse(amountController.text);
     if (title.isEmpty || amount <= 0 || _selectedDate == null) {
       return;
     }
-    widget.addTx(title, amount,_selectedDate);
+    widget.addTx(title, amount, _selectedDate);
     Navigator.of(context).pop();
   }
 
-  void _PresentDateTimePiker() {
+  void _presentDateTimePiker() {
     showDatePicker(
             context: context,
             initialDate: DateTime.now(),
@@ -74,7 +74,7 @@ class _NewTransectionState extends State<NewTransection> {
                         : 'Picked Date ${DateFormat.yMd().format(_selectedDate)}'),
                   ),
                   FlatButton(
-                    onPressed: _PresentDateTimePiker,
+                    onPressed: _presentDateTimePiker,
                     child: Text('Chose Date'),
                     textColor: Theme.of(context).primaryColor,
                   )

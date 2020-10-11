@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
                 button: TextStyle(color: Colors.white)),
             appBarTheme: AppBarTheme(
               textTheme: ThemeData.light().textTheme.copyWith(
-                  title: TextStyle(
+                  headline6: TextStyle(
                       fontFamily: 'OpenSens',
                       fontSize: 20,
                       fontWeight: FontWeight.bold)),
@@ -67,6 +67,14 @@ class _MyAppHomePageState extends State<MyAppHomePage> {
     });
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransection.removeWhere((tx) {
+        return tx.id == id;
+      });
+    });
+  }
+
   void _startAddNewTransection(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -94,7 +102,7 @@ class _MyAppHomePageState extends State<MyAppHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransection),
-            TransectionList(_userTransection),
+            TransectionList(_userTransection, _deleteTransaction),
           ],
         ),
       ),
